@@ -1,0 +1,6 @@
+﻿{
+  "Error": {
+    "VALIDATION_FAILED": "Please correct the specified validation errors and try again",
+    "INVALID_GUID": "Token or retrieval reference number is invalid."
+  }
+}

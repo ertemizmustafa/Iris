@@ -1,0 +1,6 @@
+﻿{
+  "Error": {
+    "VALIDATION_FAILED": "Lütfen, belirtilen doğrulama hatalarını düzeltip tekrar deneyin.",
+    "INVALID_GUID": "Token veya retrieval reference number değeri geçersiz."
+  }
+}
