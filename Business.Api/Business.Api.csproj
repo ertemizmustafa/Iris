@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Resources\en-EN.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\en-EN.json" />
+    <Resource Include="Resources\tr-TR.json" />
   </ItemGroup>
 
   <ItemGroup>

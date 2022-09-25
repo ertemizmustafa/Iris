@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Localization;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
@@ -39,11 +40,15 @@ namespace Iris.Localization.AspNetCore
 
             var baseName = typeInfo.FullName;
 
+
+            var resourcePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
             return _localizerCache.GetOrAdd(baseName, _ => CreateHcStringLocalizer(assembly, baseName));
         }
 
         public IStringLocalizer Create(string baseName, string location)
         {
+            
             if (baseName == null)
             {
                 throw new ArgumentNullException(nameof(baseName));
