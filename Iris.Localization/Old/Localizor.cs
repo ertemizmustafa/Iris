@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace Iris.Localization
+namespace Iris.Localization.Old
 {
     public class Localizor : IStringLocalizer<string>
     {

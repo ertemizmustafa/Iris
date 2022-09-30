@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Iris.Localization
+namespace Iris.Localization.Old
 {
     public static class Dependency
     {
@@ -30,7 +30,7 @@ namespace Iris.Localization
             {
                 var assembly = queue.Dequeue();
 
-                if(assembly.FullName.Contains("Iris"))
+                if (assembly.FullName.Contains("Iris"))
                 {
                     var aa = "";
                 }

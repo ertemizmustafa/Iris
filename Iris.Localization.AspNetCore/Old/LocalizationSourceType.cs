@@ -1,4 +1,4 @@
-﻿namespace Iris.Localization.AspNetCore
+﻿namespace Iris.Localization.AspNetCore.Old
 {
     public enum LocalizationSourceType
     {

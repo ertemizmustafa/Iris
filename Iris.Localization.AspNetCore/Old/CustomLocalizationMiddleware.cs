@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Iris.Localization.AspNetCore
+namespace Iris.Localization.AspNetCore.Old
 {
     /// <summary>
     /// Arakatman localizasyon uygulanıyor
@@ -22,7 +22,7 @@ namespace Iris.Localization.AspNetCore
         {
             string path = httpContext.Request.Path;
 
-            if (StaticFileExtensions.Any(i => path.EndsWith(i, System.StringComparison.OrdinalIgnoreCase)))
+            if (StaticFileExtensions.Any(i => path.EndsWith(i, StringComparison.OrdinalIgnoreCase)))
             {
                 await _next(httpContext);
                 return;

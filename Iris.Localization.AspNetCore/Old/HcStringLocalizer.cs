@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Globalization;
 
-namespace Iris.Localization.AspNetCore
+namespace Iris.Localization.AspNetCore.Old
 {
     public class HcStringLocalizer : IStringLocalizer
     {
@@ -70,7 +70,8 @@ namespace Iris.Localization.AspNetCore
 
             _logger.LogDebug($"{nameof(ResourceManagerStringLocalizer)} searched for '{name}' in '{_baseName}' with culture '{keyCulture}'.");
 
-            if (_missingCache.ContainsKey(cacheKey)) return null;
+            if (_missingCache.ContainsKey(cacheKey))
+                return null;
 
             try
             {

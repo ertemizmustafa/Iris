@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace Iris.Localization.AspNetCore
+namespace Iris.Localization.AspNetCore.Old
 {
     /// <summary>
     /// Ozellikler

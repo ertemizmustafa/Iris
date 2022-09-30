@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Iris.Localization
+namespace Iris.Localization.Old
 {
     public class CustomLocalizorFactory : IStringLocalizerFactory
     {

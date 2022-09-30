@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Iris.Localization
+namespace Iris.Localization.Old
 {
     public class Constants
     {

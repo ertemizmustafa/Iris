@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace Iris.Localization.AspNetCore
+namespace Iris.Localization.AspNetCore.Old
 {
     public class HcLocalizerFactory : IStringLocalizerFactory
     {
@@ -38,7 +38,7 @@ namespace Iris.Localization.AspNetCore
             var assembly = typeInfo.Assembly;
             var assemblyName = new AssemblyName(assembly.FullName);
 
-            var baseName = typeInfo.FullName;
+            var baseName = typeInfo.FullName ?? "";
 
 
             var resourcePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
@@ -48,7 +48,7 @@ namespace Iris.Localization.AspNetCore
 
         public IStringLocalizer Create(string baseName, string location)
         {
-            
+
             if (baseName == null)
             {
                 throw new ArgumentNullException(nameof(baseName));

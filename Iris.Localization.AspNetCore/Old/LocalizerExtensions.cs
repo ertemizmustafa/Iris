@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace Iris.Localization.AspNetCore
+namespace Iris.Localization.AspNetCore.Old
 {
     /// <summary>
     /// Baslangıc Lokalizasyon ekleme

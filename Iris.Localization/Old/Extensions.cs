@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Iris.Localization.Old
 {
     public static class JsonLocalizationServiceCollectionExtensions
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Iris.Localization.AspNetCore
+namespace Iris.Localization.AspNetCore.Old
 {
     internal class ResourceManager : IResourceManager
     {
@@ -22,6 +22,23 @@ namespace Iris.Localization.AspNetCore
             _hcLocalizationOptions = hcLocalizationOptions;
             _logger = logger;
             _stringData = new List<LocalData>();
+        }
+
+        public string GetString(string name)
+        {
+            return GetString(name, CultureInfo.CurrentUICulture);
+        }
+
+        public string GetString(string name, CultureInfo culture)
+        {
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
+
+            InitializeData();
+
+            LocalData result = _stringData.FirstOrDefault(x => x.CultureName == culture.Name && x.Name == name);
+            if (result != null) return result.Value;
+
+            return _stringData.FirstOrDefault(x => string.IsNullOrEmpty(x.CultureName) && x.Name == name)?.Value;
         }
 
         public IEnumerable<string> GetAllNames(bool includeParentCultures)
@@ -51,27 +68,19 @@ namespace Iris.Localization.AspNetCore
             }
         }
 
-        public string GetString(string name)
-        {
-            return GetString(name, CultureInfo.CurrentUICulture);
-        }
 
-        public string GetString(string name, CultureInfo culture)
-        {
-            if (culture == null) throw new ArgumentNullException(nameof(culture));
 
-            InitializeData();
 
-            LocalData result = _stringData.FirstOrDefault(x => x.CultureName == culture.Name && x.Name == name);
-            if (result != null) return result.Value;
-
-            return _stringData.FirstOrDefault(x => string.IsNullOrEmpty(x.CultureName) && x.Name == name)?.Value;
-        }
 
 
         private void InitializeData()
         {
-            if (_stringData.Any()) return;
+            if (_stringData.Any())
+                return;
+
+            //_hcLocalizationOptions.ConnectionString ?? "";
+
+
 
         }
     }

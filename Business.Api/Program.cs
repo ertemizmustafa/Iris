@@ -1,6 +1,6 @@
 using Iris;
 using Iris.Localization;
-using Iris.Localization.AspNetCore;
+using Iris.Localization.AspNetCore.Old;
 
 var builder = WebApplication.CreateBuilder(args);
 
