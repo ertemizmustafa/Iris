@@ -43,7 +43,7 @@ namespace Iris.Localization.Old
 
                 var resourceNotFound = false;
 
-                if (string.IsNullO980rEmpty(translated))
+                if (string.IsNullOrEmpty(translated))
                 {
                     resourceNotFound = true;
                     translated = string.Empty;

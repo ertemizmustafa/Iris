@@ -18,7 +18,7 @@ AssemblyHelper.LoadAssemblies();
 AssemblyHelper.SearchinDomain();
 
 
-builder.Services.AddCustomLocalization(x => { x.UseDatabase = true; x.UseJsonFile = true; x.ResourcesPath = "Resources"; });
+//builder.Services.AddCustomLocalization(x => { x.UseDatabase = true; x.UseJsonFile = true; x.ResourcesPath = "Resources"; });
 
 
 

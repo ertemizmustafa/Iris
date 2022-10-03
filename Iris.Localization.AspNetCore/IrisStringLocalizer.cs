@@ -1,19 +1,13 @@
 ﻿using Iris.Localization.AspNetCore.Old;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Iris.Localization.AspNetCore
 {
     public class IrisStringLocalizer : IStringLocalizer
     {
-
-
         private readonly ConcurrentDictionary<string, object> _missingCache = new ConcurrentDictionary<string, object>();
         private readonly IResourceManager _resourceManager;
         private readonly string _baseName;
@@ -54,7 +48,39 @@ namespace Iris.Localization.AspNetCore
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
-            throw new NotImplementedException();
+            var culture = CultureInfo.CurrentUICulture;
+
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
+
+            foreach (var name in _resourceManager.GetAllStrings(includeParentCultures, culture))
+            {
+                var value = GetStringSafely(name, culture);
+                yield return new LocalizedString(name, value ?? name, resourceNotFound: value == null, searchedLocation: _baseName);
+            }
+        }
+
+        private string GetStringSafely(string name, CultureInfo culture)
+        {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+
+            var keyCulture = culture ?? CultureInfo.CurrentUICulture;
+
+            var cacheKey = $"name={name}&culture={keyCulture.Name}";
+
+            _logger.LogDebug($"{nameof(ResourceManagerStringLocalizer)} searched for '{name}' in '{_baseName}' with culture '{keyCulture}'.");
+
+            if (_missingCache.ContainsKey(cacheKey))
+                return null;
+
+            try
+            {
+                return culture == null ? _resourceManager.GetString(name) : _resourceManager.GetString(name, culture);
+            }
+            catch (Exception)
+            {
+                _missingCache.TryAdd(cacheKey, null);
+                return null;
+            }
         }
     }
 }

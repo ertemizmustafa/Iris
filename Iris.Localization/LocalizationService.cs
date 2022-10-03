@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace Iris.Localization
 {
-    internal class LocalizationService : ILocalizationService
-    {
-        private readonly LocalizationDbContext _localizationDbContext;
+    //internal class LocalizationService : ILocalizationService
+    //{
+    //    private readonly LocalizationDbContext _localizationDbContext;
 
-        public LocalizationService(LocalizationDbContext dbContext)
-        {
-            _localizationDbContext = dbContext;
-        }
+    //    public LocalizationService(LocalizationDbContext dbContext)
+    //    {
+    //        _localizationDbContext = dbContext;
+    //    }
 
-        public async Task<IEnumerable<ResourceData>> GetResourceDatas(CancellationToken cancellationToken)
-        {
-            return await _localizationDbContext.ResourceDatas.AsNoTracking().ToListAsync(cancellationToken);
-            //.Where(x => x.GroupCode == groupCode && x.Code == code && x.IsActive && x.DefinitionGroup.IsActive)
-        }
-    }
+    //    public async Task<IEnumerable<ResourceData>> GetResourceDatas(CancellationToken cancellationToken)
+    //    {
+    //        return await _localizationDbContext.ResourceDatas.AsNoTracking().ToListAsync(cancellationToken);
+    //        //.Where(x => x.GroupCode == groupCode && x.Code == code && x.IsActive && x.DefinitionGroup.IsActive)
+    //    }
+    //}
 }

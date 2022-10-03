@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Iris.Localization.Abstractions\Iris.Localization.Abstractions.csproj" />
     <ProjectReference Include="..\Iris.Localization.SqlServer\Iris.Localization.SqlServer.csproj" />
   </ItemGroup>
 

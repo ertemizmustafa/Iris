@@ -47,9 +47,9 @@ namespace Iris.Localization.Old
 
         internal static void AddJsonLocalizationServices(IServiceCollection services)
         {
-            services.TryAddSingleton<IStringLocalizerFactory, HcLocalizerFactory>();
-            services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
-            services.TryAddTransient(typeof(IStringLocalizer), typeof(StringLocalizer));
+            //services.TryAddSingleton<IStringLocalizerFactory, HcLocalizerFactory>();
+            //services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+            //services.TryAddTransient(typeof(IStringLocalizer), typeof(StringLocalizer));
         }
 
         internal static void AddJsonLocalizationServices(
