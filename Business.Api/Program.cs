@@ -1,6 +1,6 @@
 using Iris;
 using Iris.Localization;
-using Iris.Localization.AspNetCore.Old;
+using Iris.Localization.AspNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,7 @@ AssemblyHelper.SetOptions(x => { x.DomainNames = new string[] { "Business", "Iri
 AssemblyHelper.LoadAssemblies();
 AssemblyHelper.SearchinDomain();
 
+builder.Services.AddIrisLocalization(x => { x.ResourcesPath = "Resources"; x.ConnectionString = "lelele"; });
 
 //builder.Services.AddCustomLocalization(x => { x.UseDatabase = true; x.UseJsonFile = true; x.ResourcesPath = "Resources"; });
 
@@ -26,6 +27,13 @@ AssemblyHelper.SearchinDomain();
 
 var app = builder.Build();
 
+var supportedCultures = new[] { "tr-TR", "en-US" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -33,7 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCustomLocalization();
+//app.UseCustomLocalization();
 
 app.UseHttpsRedirection();
 

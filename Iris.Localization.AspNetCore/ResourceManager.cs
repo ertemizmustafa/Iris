@@ -72,6 +72,8 @@ namespace Iris.Localization.AspNetCore
             yield return new ResourceData { Id = 1, CultureName = "tr-TR", Name = "Star", Value = "Yıldız", Path = "" };
             yield return new ResourceData { Id = 2, CultureName = "tr-TR", Name = "Black", Value = "Siyah", Path = "" };
             yield return new ResourceData { Id = 2, CultureName = "tr-TR", Name = "ERROR_OCCURED", Value = "Bir hata oluştu.", Path = "" };
+            yield return new ResourceData { Id = 2, CultureName = "en-US", Name = "ERROR_OCCURED", Value = "Opps.. Error occured while processing..", Path = "" };
+
         }
     }
 }

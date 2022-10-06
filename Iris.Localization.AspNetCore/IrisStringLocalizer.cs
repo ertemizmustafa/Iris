@@ -1,5 +1,4 @@
-﻿using Iris.Localization.AspNetCore.Old;
-using Microsoft.Extensions.Localization;
+﻿using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Globalization;
