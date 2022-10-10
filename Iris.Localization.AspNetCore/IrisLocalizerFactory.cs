@@ -1,13 +1,8 @@
 ﻿using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Iris.Localization.AspNetCore
 {
@@ -30,12 +25,22 @@ namespace Iris.Localization.AspNetCore
 
         }
 
+        //bu metod yaratıyor
         public IStringLocalizer Create(Type resourceSource)
         {
-            throw new NotImplementedException();
+            if (resourceSource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceSource));
+            }
+
+            var typeInfo = resourceSource.GetTypeInfo();
+            var assembly = typeInfo.Assembly;
+            var assemblyName = assembly.GetName();
+
+            var baseName = typeInfo.FullName ?? "";
+
+            return _localizerCache.GetOrAdd(baseName, _ => CreateIrisStringLocalizer(assembly, baseName));
         }
-
-
 
         public IStringLocalizer Create(string baseName, string location)
         {
@@ -49,12 +54,11 @@ namespace Iris.Localization.AspNetCore
                 throw new ArgumentNullException(nameof(location));
             }
 
-            return _localizerCache.GetOrAdd($"B={baseName},L={location}", _ =>
+            return _localizerCache.GetOrAdd($"base={baseName},location={location}", _ =>
             {
                 var assemblyName = new AssemblyName(location);
                 var assembly = Assembly.Load(assemblyName);
                 baseName = GetResourcePrefix(baseName, location);
-
                 return CreateIrisStringLocalizer(assembly, baseName);
             });
         }

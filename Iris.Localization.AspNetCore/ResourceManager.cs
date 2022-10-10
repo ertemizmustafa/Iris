@@ -1,15 +1,20 @@
 ﻿using Iris.Localization.Abstractions.Data;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Globalization;
+using System.Reflection;
 
 namespace Iris.Localization.AspNetCore
 {
-    public class ResourceManager : IResourceManager
+    public class ResourceManager :  IResourceManager
     {
         private readonly string _baseName;
         private readonly IrisLocalizationOptions _options;
         private readonly ILogger _logger;
-        private readonly List<ResourceData> _resourceDatas;
+        private List<ResourceData> _resourceDatas;
+
+
 
         public ResourceManager(string baseName, IrisLocalizationOptions options, ILogger logger)
         {
@@ -63,17 +68,31 @@ namespace Iris.Localization.AspNetCore
             return _resourceDatas?.FirstOrDefault(x => string.IsNullOrEmpty(x.CultureName) && x.Name == name)?.Value ?? "";
         }
 
-        private IEnumerable<ResourceData> InitializeData()
+        private List<ResourceData> InitializeData()
         {
 
-            if (_resourceDatas.Any())
-                yield return null;
+            if (!_resourceDatas.Any() || _resourceDatas.Count() == 0)
+            {
+                _resourceDatas = new List<ResourceData>
+                {
+                    new ResourceData { Id = 1, CultureName = "tr-TR", Name = "Star", Value = "Yıldız", Path = "" },
+                    new ResourceData { Id = 2, CultureName = "tr-TR", Name = "Black", Value = "Siyah", Path = "" },
+                    new ResourceData { Id = 3, CultureName = "tr-TR", Name = "ERROR_OCCURED", Value = "Bir hata oluştu.", Path = "" },
+                    new ResourceData { Id = 4, CultureName = "en-US", Name = "ERROR_OCCURED", Value = "Opps.. Error occured while processing..", Path = "" }
+                };
+            }
 
-            yield return new ResourceData { Id = 1, CultureName = "tr-TR", Name = "Star", Value = "Yıldız", Path = "" };
-            yield return new ResourceData { Id = 2, CultureName = "tr-TR", Name = "Black", Value = "Siyah", Path = "" };
-            yield return new ResourceData { Id = 2, CultureName = "tr-TR", Name = "ERROR_OCCURED", Value = "Bir hata oluştu.", Path = "" };
-            yield return new ResourceData { Id = 2, CultureName = "en-US", Name = "ERROR_OCCURED", Value = "Opps.. Error occured while processing..", Path = "" };
+            return _resourceDatas;
 
         }
     }
+
+    public class Aa : ResourceManagerStringLocalizer
+    {
+        public Aa()
+        {
+        }
+    }
 }
+
+

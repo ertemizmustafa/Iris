@@ -28,6 +28,12 @@ namespace Iris.Localization.AspNetCore.Extensions
         {
             services.TryAddSingleton<IStringLocalizerFactory, IrisLocalizerFactory>();
             services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+            //services.TryAddTransient(typeof(IStringLocalizer), typeof(StringLocalizer));
+            //services.TryAddTransient(typeof(IStringLocalizer<string>), typeof(StringLocalizer<>));
+            // services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+
+
+
         }
 
     }

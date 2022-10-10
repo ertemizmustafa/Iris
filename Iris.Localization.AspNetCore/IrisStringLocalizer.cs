@@ -7,7 +7,7 @@ namespace Iris.Localization.AspNetCore
 {
     public class IrisStringLocalizer : IStringLocalizer
     {
-        private readonly ConcurrentDictionary<string, object> _missingCache = new ConcurrentDictionary<string, object>();
+        private readonly ConcurrentDictionary<string, object?> _missingCache = new ConcurrentDictionary<string, object?>();
         private readonly IResourceManager _resourceManager;
         private readonly string _baseName;
         private readonly ILogger _logger;
@@ -39,7 +39,7 @@ namespace Iris.Localization.AspNetCore
                 if (name == null) throw new ArgumentNullException(nameof(name));
 
                 var format = GetStringSafely(name, null);
-                var value = string.Format(format ?? name, arguments);
+                var value = string.Format(CultureInfo.CurrentCulture, format ?? name, arguments);
 
                 return new LocalizedString(name, value, resourceNotFound: format == null, searchedLocation: _baseName);
             }
@@ -49,7 +49,10 @@ namespace Iris.Localization.AspNetCore
         {
             var culture = CultureInfo.CurrentUICulture;
 
-            if (culture == null) throw new ArgumentNullException(nameof(culture));
+            if (culture == null)
+            {
+                throw new ArgumentNullException(nameof(culture));
+            }
 
             foreach (var name in _resourceManager.GetAllStrings(includeParentCultures, culture))
             {
@@ -58,7 +61,7 @@ namespace Iris.Localization.AspNetCore
             }
         }
 
-        private string GetStringSafely(string name, CultureInfo culture)
+        private string? GetStringSafely(string name, CultureInfo? culture)
         {
             if (name == null) throw new ArgumentNullException(nameof(name));
 
